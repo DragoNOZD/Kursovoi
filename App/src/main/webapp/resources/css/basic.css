@@ -1,0 +1,17 @@
+.red {
+    background-color: #141414;
+    color: #ff2e31;
+}
+.red::selection {
+    background-color: #ff2e31;
+    color: #141414;
+}
+.warnings {
+    background-color: #ff2e31;
+    color: #141414;
+    text-align: center;
+}
+.warnings::selection{
+    background-color: #141414;
+    color: #ff2e31;
+}
