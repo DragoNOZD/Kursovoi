@@ -1,0 +1,2 @@
+CREATE USER test_db WITH PASSWORD 'test_db';
+CREATE SCHEMA test_db AUTHORIZATION test_db;
