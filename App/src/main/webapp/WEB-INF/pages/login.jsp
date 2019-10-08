@@ -1,5 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=windows-1251" language="java" %>
+<%@ page contentType="text/html;charset=windows-1251" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,10 +11,15 @@
 			<div class="warnings">
 				${warning}
 			</div>
-			<form method="post" action="main">
+			<form method="post" action="loginCheck">
 				<label>
 					Login
-					<input name="login" />
+					<input name="login" required="required"/>
+				</label>
+				<br/>
+				<label>
+					Password
+					<input type="password" name="Password" required="required"/>
 				</label>
 				<br/>
 				<label>
@@ -22,7 +27,7 @@
 					<input name="name" />
 				</label>
 				<br/>
-				<input type="submit" value="login" />
+				<input type="submit" value="Sign Up" />
 			</form>
 		</body>
 </html>

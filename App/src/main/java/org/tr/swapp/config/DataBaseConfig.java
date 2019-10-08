@@ -1,90 +1,91 @@
 package org.tr.swapp.config;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@PropertySource("classpath:app.properties")
-//@EnableSpringDataWebSupport
-//@EnableTransactionManagement
-//@EnableJpaRepositories("org.tr.swapp")
+@Configuration
+@PropertySource({"classpath:app.properties"})
+@EnableSpringDataWebSupport
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages = {"org.tr.swapp"})
 public class DataBaseConfig {
-//    private static final String PROP_DATABASE_DRIVER = "db.driver";
-//    private static final String PROP_DATABASE_PASSWORD = "db.password";
-//    private static final String PROP_DATABASE_URL = "db.url";
-//    private static final String PROP_DATABASE_USERNAME = "db.username";
-//    private static final String PROP_HIBERNATE_DIALECT = "hibernate.dialect";
-//    private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-//    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
-//    private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
-//
-//    @Resource
-//    private Environment env;
-//
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//
-//        dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
-//        dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
-//        dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
-//        dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
-//
-//        return dataSource;
-//    }
-//
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactoryBean.setDataSource(dataSource());
-//        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-//        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
-//
-//
-//        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
-//
-//        return entityManagerFactoryBean;
-//    }
-//
-//    @Bean
-//    public LocalSessionFactoryBean sessionFactory(){
-//        final LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-//        sessionFactoryBean.setDataSource(dataSource());
-//        sessionFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
-//        sessionFactoryBean.setHibernateProperties(getHibernateProperties());
-//        return sessionFactoryBean;
-//    }
-//
-//    @Bean
-//    @Autowired
-//    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(entityManagerFactory);
-//        return transactionManager;
-//    }
-//
-//    private Properties getHibernateProperties() {
-//        Properties properties = new Properties();
-//        properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
-//        properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
-//        properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
-//
-//        return properties;
-//    }
+    private static final String PROP_DATABASE_DRIVER = "db.driver";
+    private static final String PROP_DATABASE_PASSWORD = "db.password";
+    private static final String PROP_DATABASE_URL = "db.url";
+    private static final String PROP_DATABASE_USERNAME = "db.username";
+    private static final String PROP_HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+    private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
+
+    @Resource
+    private Environment env;
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
+        dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
+
+        return dataSource;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        entityManagerFactoryBean.setPackagesToScan("org.tr.swapp.*");
+        //entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
+        return entityManagerFactoryBean;
+    }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory(){
+        final LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource());
+        sessionFactoryBean.setPackagesToScan("org.tr.swapp");
+        sessionFactoryBean.setHibernateProperties(getHibernateProperties());
+        return sessionFactoryBean;
+    }
+
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+        //transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
+    }
+
+    private Properties getHibernateProperties() {
+        Properties properties = new Properties();
+        properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
+        properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
+        properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
+
+        return properties;
+    }
 }
 
 // -/////////////////////////////////////////////////////////////////////////////////////////////-

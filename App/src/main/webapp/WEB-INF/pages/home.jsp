@@ -1,5 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=windows-1251" language="java" %>
+<%@ page contentType="text/html;charset=windows-1251" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,9 +9,7 @@
     </head>
     <body class="red">
         <div>
-	        <a class="login" href="${pageContext.request.contextPath}/login">Login</a>
-	        <a class="login" href="${pageContext.request.contextPath}/login2">Test</a>
-	        <script src="<spring:url value="/resources/js/newHello.js" />"></script>
+	        <a class="login" href="${pageContext.request.contextPath}/login">Sign Up</a>
         </div>
     </body>
 </html>
