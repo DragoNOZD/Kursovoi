@@ -1,6 +1,5 @@
 package org.tr.swapp.config;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,12 +9,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -71,10 +71,10 @@ public class DataBaseConfig {
 
     @Bean
     @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        //transactionManager.setEntityManagerFactory(entityManagerFactory);
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory/*SessionFactory sessionFactory*/) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        //transactionManager.setSessionFactory(sessionFactory);
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
 

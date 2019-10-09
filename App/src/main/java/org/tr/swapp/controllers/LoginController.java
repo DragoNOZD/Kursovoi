@@ -33,9 +33,7 @@ public class LoginController {
             model.addAttribute("warning", "Login is already used.");
             return "login";
         }
-        User user = new User(login, password);
-        user.setName(name);
-        userService.addUser(user);
+        userService.addUser(new User(login, password));
         return "redirect:/main";
     }
 }

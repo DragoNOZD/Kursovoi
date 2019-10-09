@@ -1,5 +1,7 @@
 package org.tr.swapp.user;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,13 +9,14 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(generator = "uuid")
-    @Column(unique=true, nullable = false, length = 20)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(nullable = false)
     private String login;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
-    @Column(length = 20)
+    @Column
     private String name;
 
     /*Library*/
@@ -40,6 +43,10 @@ public class User {
 
     public boolean checkPassword(String password) {
         return this.password.equals(password);
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
