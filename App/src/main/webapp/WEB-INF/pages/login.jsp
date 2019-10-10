@@ -19,7 +19,7 @@
 				<br/>
 				<label>
 					Password
-					<input <%--type="password"--%> name="Password" required="required"/>
+					<input <%--type="password"--%> name="password" required="required"/>
 				</label>
 				<br/>
 				<label>

@@ -30,10 +30,10 @@ public class LoginController {
                              @RequestParam(value = "password", defaultValue = "") String password,
                              @RequestParam(value = "name", defaultValue = "") String name){
         if (userService.getByLogin(login) != null){
-            model.addAttribute("warning", "Login is already used.");
+            model.addAttribute("warning", "Login \"" + login + "\" is already used.");
             return "login";
         }
         userService.addUser(new User(login, password));
-        return "redirect:/main";
+        return "redirect:/main1?login=" + login;
     }
 }

@@ -8,12 +8,12 @@ import javax.persistence.*;
 @Table(name = "User_entity")
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    //@GeneratedValue(generator = "uuid")
+    //@GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(nullable = false)
     private String login;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -30,7 +30,12 @@ public class User {
 
     /*Wishlist*/
 
+    public User() {
+    }
+
     public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public String getLogin() {

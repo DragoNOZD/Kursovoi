@@ -1,5 +1,7 @@
 package org.tr.swapp.controllers;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,8 @@ public class MainPageController {
     }
 
     @RequestMapping(value = "/main1", method = RequestMethod.GET)
-    public String main(Model model, @RequestParam(value = "password", defaultValue = "") String password) {
-        model.addAttribute("message", "Hello, " + password);
+    public String main(Model model, @RequestParam(value = "login", defaultValue = "") String login) {
+        model.addAttribute("message", "Hello, " + login);
         return "main";
     }
 }
