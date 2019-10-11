@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void editUser(User user) {
+        addUser(user);
+    }
+
+    @Override
     public void deleteUser(String login) {
         userRepository.delete(login);
     }

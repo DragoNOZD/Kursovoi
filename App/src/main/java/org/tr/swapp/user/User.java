@@ -1,15 +1,16 @@
 package org.tr.swapp.user;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.tr.swapp.Country;
+import org.tr.swapp.game.Game;
 
 import javax.persistence.*;
+import java.net.URL;
+import java.util.List;
 
 @Entity
 @Table(name = "User_entity")
 public class User {
     @Id
-    //@GeneratedValue(generator = "uuid")
-    //@GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(nullable = false)
     private String login;
 
@@ -19,16 +20,26 @@ public class User {
     @Column
     private String name;
 
-    /*Library*/
+    //@Column
+    //private String email;
 
     //@Column
-    //private ArrayList<User> friends;
+    //private Calendar registrationDate;
 
-    /*Image*/
+    @Column
+    @OneToMany
+    private List<Game> library;
 
-    /*Country*/
+    @Column
+    @OneToMany
+    private List<User> friends;
 
-    /*Wishlist*/
+    @Column
+    private URL image;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Country country = Country.NOT_SELECTED;
 
     public User() {
     }
@@ -40,10 +51,6 @@ public class User {
 
     public String getLogin() {
         return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public boolean checkPassword(String password) {
@@ -64,5 +71,45 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Game> getLibrary() {
+        return library;
+    }
+
+    public void addGamesToLibrary(Game game) {
+        this.library.add(game);
+    }
+
+    public void addGamesToLibrary(List<Game> games) {
+        this.library.addAll(games);
+    }
+
+    public URL getImage() {
+        return image;
+    }
+
+    public void setImage(URL image) {
+        this.image = image;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void addFriends(User friend) {
+        friends.add(friend);
+    }
+
+    public void addFriends(List<User> friends) {
+        this.friends.addAll(friends);
     }
 }
