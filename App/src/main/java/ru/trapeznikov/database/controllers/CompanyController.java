@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.trapeznikov.database.company.Company;
 import ru.trapeznikov.database.company.CompanyService;
 
 @Controller
@@ -32,6 +33,7 @@ public class CompanyController {
             model.addAttribute("warning", "Company is already exists.");
             return "companies/newCompany";
         }
+        companyService.addCompany(new Company(inn, name));
         return "redirect:/";
     }
 

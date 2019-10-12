@@ -32,6 +32,7 @@ public class LoginController {
             return "login";
         } else if (!userService.getByLogin(login).checkPassword(password)) {
             model.addAttribute("warning", "Password is not correct.");
+            return "login";
         }
         return "redirect:/user/" + login;
     }

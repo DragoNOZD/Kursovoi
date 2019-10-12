@@ -30,9 +30,9 @@ public class SignUpController {
                               @RequestParam("password") String password) {
         if (userService.getByLogin(login) != null){
             model.addAttribute("warning", "Login \"" + login + "\" is already used.");
-            return "signUp";
+            return "signup";
         }
         userService.addUser(new User(login, password));
-        return "redirect:/user/" + login;
+        return "redirect:/";
     }
 }
