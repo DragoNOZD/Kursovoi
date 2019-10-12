@@ -1,4 +1,4 @@
-package ru.trapeznikov.database.links.companytogame;
+package ru.trapeznikov.database.companytogamelink;
 
 import java.util.List;
 

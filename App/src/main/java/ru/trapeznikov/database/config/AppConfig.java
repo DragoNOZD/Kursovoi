@@ -20,7 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 @Configuration
-@ComponentScan({"org.tr.swapp"})
+@ComponentScan({"ru.trapeznikov.database"})
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 

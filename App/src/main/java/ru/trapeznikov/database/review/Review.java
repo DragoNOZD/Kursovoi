@@ -14,13 +14,13 @@ public class Review {
     @Column(nullable = false)
     private long id;
 
-    @Column(nullable = false)
+    @ManyToOne
     private Game game;
 
     //@Column
     //private Calendar date;
 
-    @Column(nullable = false)
+    @ManyToOne
     private User reviewer;
 
     @Enumerated(EnumType.STRING)

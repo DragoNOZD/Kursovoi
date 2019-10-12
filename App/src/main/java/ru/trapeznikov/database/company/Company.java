@@ -1,13 +1,12 @@
 package ru.trapeznikov.database.company;
 
 import ru.trapeznikov.database.Country;
+import ru.trapeznikov.database.companytogamelink.CompanyToGameLink;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.net.URL;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Company")
@@ -30,6 +29,9 @@ public class Company {
 
     @Column
     private URL site;
+
+    @OneToMany
+    private List<CompanyToGameLink> gameLinks;
 
     public Company() {
     }
@@ -73,5 +75,13 @@ public class Company {
 
     public void setSite(URL site) {
         this.site = site;
+    }
+
+    public List<CompanyToGameLink> getGameLinks() {
+        return gameLinks;
+    }
+
+    public void setGameLinks(List<CompanyToGameLink> gameLinks) {
+        this.gameLinks = gameLinks;
     }
 }

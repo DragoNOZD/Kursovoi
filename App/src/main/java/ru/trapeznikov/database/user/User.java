@@ -2,6 +2,7 @@ package ru.trapeznikov.database.user;
 
 import ru.trapeznikov.database.Country;
 import ru.trapeznikov.database.game.Game;
+import ru.trapeznikov.database.review.Review;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -26,13 +27,14 @@ public class User {
     //@Column
     //private Calendar registrationDate;
 
-    @Column
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Game> library;
 
-    @Column
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<User> friends;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Review> reviews;
 
     @Column
     private URL image;

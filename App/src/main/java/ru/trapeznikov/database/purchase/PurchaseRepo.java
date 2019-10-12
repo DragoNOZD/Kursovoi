@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PurchaseRepo extends JpaRepository<Purchase, Long> {
 
-    @Query("SELECT p from purchase where buyer.login = :login")
+    @Query("SELECT p from Purchase p where p.buyer.login = :login")
     List<Purchase> getAllByLogin(@Param("login") String login);
 }

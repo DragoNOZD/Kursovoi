@@ -1,4 +1,4 @@
-package ru.trapeznikov.database.links.companytogame;
+package ru.trapeznikov.database.companytogamelink;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

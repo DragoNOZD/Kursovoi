@@ -23,7 +23,7 @@ import java.util.Properties;
 @PropertySource({"classpath:app.properties"})
 @EnableSpringDataWebSupport
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"org.tr.swapp"})
+@EnableJpaRepositories(basePackages = {"ru.trapeznikov.database"})
 public class DataBaseConfig {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
@@ -54,7 +54,7 @@ public class DataBaseConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan("org.tr.swapp.**");
+        entityManagerFactoryBean.setPackagesToScan("ru.trapeznikov.database.*");
         //entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
         return entityManagerFactoryBean;
@@ -64,7 +64,7 @@ public class DataBaseConfig {
     public LocalSessionFactoryBean sessionFactory(){
         final LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
-        sessionFactoryBean.setPackagesToScan("org.tr.swapp");
+        sessionFactoryBean.setPackagesToScan("ru.trapeznikov.database");
         sessionFactoryBean.setHibernateProperties(getHibernateProperties());
         return sessionFactoryBean;
     }

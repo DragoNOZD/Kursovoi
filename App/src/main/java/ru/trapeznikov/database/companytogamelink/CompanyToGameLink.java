@@ -1,4 +1,4 @@
-package ru.trapeznikov.database.links.companytogame;
+package ru.trapeznikov.database.companytogamelink;
 
 import ru.trapeznikov.database.CompanyType;
 import ru.trapeznikov.database.company.Company;
@@ -14,10 +14,10 @@ public class CompanyToGameLink {
     @Column(nullable = false)
     private long id;
 
-    @Column(nullable = false)
+    @ManyToOne
     private Game game;
 
-    @Column(nullable = false)
+    @ManyToOne
     private Company company;
 
     @Enumerated(EnumType.STRING)

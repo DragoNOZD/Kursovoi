@@ -1,12 +1,10 @@
-package ru.trapeznikov.database.links.gametopurchase;
+package ru.trapeznikov.database.gametopurchaselink;
 
 import ru.trapeznikov.database.game.Game;
 import ru.trapeznikov.database.purchase.Purchase;
+import ru.trapeznikov.database.user.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "game_to_purchase")
@@ -16,12 +14,12 @@ public class GameToPurchaseLink {
     @Column(name = "ActivationCode")
     private String gameActivationCode;
 
-    @Column(nullable = false)
+    @ManyToOne
     private Game game;
 
     // TODO: Add search by purchase
 
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
     private Purchase purchase;
 
     public GameToPurchaseLink() {

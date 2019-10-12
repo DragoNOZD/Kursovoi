@@ -1,11 +1,14 @@
 package ru.trapeznikov.database.game;
 
 import ru.trapeznikov.database.Genre;
+import ru.trapeznikov.database.companytogamelink.CompanyToGameLink;
+import ru.trapeznikov.database.review.Review;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "Game")
+@Table(name = "game")
 public class Game{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,12 @@ public class Game{
 
     @Column
     private float discount;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
+    @OneToMany
+    private List<CompanyToGameLink> gameLinks;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -69,5 +78,21 @@ public class Game{
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public List<CompanyToGameLink> getGameLinks() {
+        return gameLinks;
+    }
+
+    public void setGameLinks(List<CompanyToGameLink> gameLinks) {
+        this.gameLinks = gameLinks;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

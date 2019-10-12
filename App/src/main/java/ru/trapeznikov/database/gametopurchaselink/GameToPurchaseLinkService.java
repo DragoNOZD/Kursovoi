@@ -1,4 +1,4 @@
-package ru.trapeznikov.database.links.gametopurchase;
+package ru.trapeznikov.database.gametopurchaselink;
 
 import java.util.List;
 
