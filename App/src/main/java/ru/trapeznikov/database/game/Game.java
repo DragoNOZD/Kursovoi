@@ -39,7 +39,7 @@ public class Game{
     public Game() {
     }
 
-    public Game(String name, int cost) {
+    public Game(String name, float cost) {
         this.name = name;
         this.cost = cost;
     }

@@ -11,7 +11,7 @@
 		<div class="warnings">
 			${warning}
 		</div>
-		<form class="login" method="post" action="loginCheck">
+		<form class="loginForm" method="post" action="loginCheck">
 			<label>
 				Login
 				<input name="login" required="required"/>
@@ -22,12 +22,7 @@
 				<input type="password" name="password" required="required"/>
 			</label>
 			<br/>
-			<label>
-				Name
-				<input name="name" />
-			</label>
-			<br/>
-			<input type="submit" value="Sign Up" />
+			<input type="submit" value="Sign In" />
 		</form>
 	</body>
 </html>

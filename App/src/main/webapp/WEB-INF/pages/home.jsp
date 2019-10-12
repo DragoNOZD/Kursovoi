@@ -8,8 +8,14 @@
         <link href="<spring:url value="/resources/css/login.css" />" rel="stylesheet"/>
     </head>
     <body class="red">
+        <div class="login">
+	        <a href="${pageContext.request.contextPath}/login">Sign In</a>
+	        <a href="${pageContext.request.contextPath}/signUp">Sign Up</a>
+        </div>
         <div>
-	        <a class="login" href="${pageContext.request.contextPath}/login">Sign Up</a>
+            <a href="${pageContext.request.contextPath}/NewGame">Add Game</a>
+            <br/>
+            <a href="${pageContext.request.contextPath}/NewCompany">Add Company</a>
         </div>
     </body>
 </html>

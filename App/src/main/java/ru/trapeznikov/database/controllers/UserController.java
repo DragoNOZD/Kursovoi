@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.trapeznikov.database.user.User;
 import ru.trapeznikov.database.user.UserService;
 
@@ -20,7 +22,7 @@ public class UserController {
 
     @RequestMapping(value = "/users")
     public String users(Model model){
-        return "users";
+        return "user/users";
     }
 
     @RequestMapping(value = "/users/{login}")
@@ -29,6 +31,6 @@ public class UserController {
         if (user != null) {
             model.addAttribute("login", user.getLogin());
         }
-        return "user";
+        return "user/user";
     }
 }
