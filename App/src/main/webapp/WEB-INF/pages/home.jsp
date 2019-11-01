@@ -16,6 +16,8 @@
             <a href="${pageContext.request.contextPath}/NewGame">Add Game</a>
             <br/>
             <a href="${pageContext.request.contextPath}/NewCompany">Add Company</a>
+            <br/>
+            <a href="${pageContext.request.contextPath}/purchase">Buy Game</a>
         </div>
     </body>
 </html>
