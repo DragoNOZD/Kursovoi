@@ -1,7 +1,6 @@
 package ru.mmo.database.purchase;
 
-import ru.mmo.database.PaymentMethod;
-import ru.mmo.database.user.User;
+import ru.mmo.database.account.Account;
 
 import javax.persistence.*;
 
@@ -15,7 +14,7 @@ public class Purchase {
     private long id;
 
     @ManyToOne
-    private User buyer;
+    private Account buyer;
 
     // TODO: Add Date, search by date, finalCost and paymentMethod
 
@@ -32,7 +31,7 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(User buyer, PaymentMethod paymentMethod) {
+    public Purchase(Account buyer, PaymentMethod paymentMethod) {
         this.buyer = buyer;
         this.paymentMethod = paymentMethod;
     }
@@ -41,11 +40,11 @@ public class Purchase {
         return id;
     }
 
-    public User getBuyer() {
+    public Account getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(Account buyer) {
         this.buyer = buyer;
     }
 

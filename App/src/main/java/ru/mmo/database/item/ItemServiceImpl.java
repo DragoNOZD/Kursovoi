@@ -2,7 +2,6 @@ package ru.mmo.database.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mmo.database.Rarity;
 
 import java.util.List;
 

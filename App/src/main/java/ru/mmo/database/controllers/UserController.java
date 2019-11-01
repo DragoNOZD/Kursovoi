@@ -5,17 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mmo.database.user.User;
-import ru.mmo.database.user.UserService;
+import ru.mmo.database.account.Account;
+import ru.mmo.database.account.AccountService;
 
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private AccountService accountService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @RequestMapping(value = "/users")
@@ -25,9 +25,9 @@ public class UserController {
 
     @RequestMapping(value = "/users/{login}")
     public String user(Model model, @PathVariable String login){
-        User user = userService.getByLogin(login);
-        if (user != null) {
-            model.addAttribute("login", user.getLogin());
+        Account account = accountService.getByLogin(login);
+        if (account != null) {
+            model.addAttribute("login", account.getLogin());
         }
         return "user/user";
     }

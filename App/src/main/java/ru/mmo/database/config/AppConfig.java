@@ -20,7 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 @Configuration
-@ComponentScan({"ru.trapeznikov.database"})
+@ComponentScan({"ru.mmo.database"})
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 

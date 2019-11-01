@@ -1,7 +1,5 @@
 package ru.mmo.database.item;
 
-import ru.mmo.database.Rarity;
-
 import javax.persistence.*;
 
 @Entity

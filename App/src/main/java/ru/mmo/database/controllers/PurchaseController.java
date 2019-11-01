@@ -6,21 +6,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.mmo.database.PaymentMethod;
+import ru.mmo.database.purchase.PaymentMethod;
 import ru.mmo.database.purchase.Purchase;
 import ru.mmo.database.purchase.PurchaseService;
-import ru.mmo.database.user.UserService;
+import ru.mmo.database.account.AccountService;
 
 @Controller
 public class PurchaseController {
 
-    private UserService userService;
+    private AccountService accountService;
 
     private PurchaseService purchaseService;
 
     @Autowired
-    public PurchaseController(UserService userService, PurchaseService purchaseService) {
-        this.userService = userService;
+    public PurchaseController(AccountService accountService, PurchaseService purchaseService) {
+        this.accountService = accountService;
         this.purchaseService = purchaseService;
     }
 
@@ -33,7 +33,7 @@ public class PurchaseController {
     public String purchaseCheck(Model model,
                                 @RequestParam("userLogin") String userLogin,
                                 @RequestParam("gameID") Long gameID){
-        purchaseService.addPurchase(new Purchase(userService.getByLogin(userLogin), PaymentMethod.DA));
+        purchaseService.addPurchase(new Purchase(accountService.getByLogin(userLogin), PaymentMethod.DA));
         return "redirect:/";
     }
 }

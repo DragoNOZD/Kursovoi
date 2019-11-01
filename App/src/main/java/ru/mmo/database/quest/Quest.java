@@ -1,7 +1,7 @@
 package ru.mmo.database.quest;
 
-import ru.mmo.database.npc.NPC;
-import ru.mmo.database.questparts.QuestPart;
+import ru.mmo.database.actor.npc.NPC;
+import ru.mmo.database.quest.questparts.QuestPart;
 
 import javax.persistence.*;
 import java.util.List;

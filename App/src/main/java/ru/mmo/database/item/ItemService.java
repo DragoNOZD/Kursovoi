@@ -1,7 +1,5 @@
 package ru.mmo.database.item;
 
-import ru.mmo.database.Rarity;
-
 import java.util.List;
 
 public interface ItemService {
