@@ -1,5 +1,6 @@
 package ru.mmo.database.actor;
 
+import ru.mmo.database.Vector;
 import ru.mmo.database.item.Item;
 
 import javax.persistence.*;
@@ -25,13 +26,7 @@ public class Actor {
     protected int HP;
 
     @Column
-    protected float X_Location;
-
-    @Column
-    protected float Y_Location;
-
-    @Column
-    protected float Z_Location;
+    protected Vector location;
 
     @ManyToMany
     private List<Item> inventory;
@@ -81,28 +76,12 @@ public class Actor {
         this.HP = HP;
     }
 
-    public float getX_Location() {
-        return X_Location;
+    public Vector getLocation() {
+        return location;
     }
 
-    public void setX_Location(float x_Location) {
-        X_Location = x_Location;
-    }
-
-    public float getY_Location() {
-        return Y_Location;
-    }
-
-    public void setY_Location(float y_Location) {
-        Y_Location = y_Location;
-    }
-
-    public float getZ_Location() {
-        return Z_Location;
-    }
-
-    public void setZ_Location(float z_Location) {
-        Z_Location = z_Location;
+    public void setLocation(Vector location) {
+        this.location = location;
     }
 
     public List<Item> getInventory() {

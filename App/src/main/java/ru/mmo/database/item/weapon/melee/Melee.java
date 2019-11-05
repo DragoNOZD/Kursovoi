@@ -12,12 +12,12 @@ public class Melee extends Weapon {
     @OneToMany
     protected List<Combo> comboList;
 
+    @Transient
     protected float damage;
 
     public Melee(String name, String pos) {
         super(name, pos);
     }
-
 
     public List<Combo> getComboList() {
         return comboList;
