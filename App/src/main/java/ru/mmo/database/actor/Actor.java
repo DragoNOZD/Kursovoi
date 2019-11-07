@@ -23,6 +23,7 @@ public class Actor {
     @Column
     protected int HPPersentage;
 
+    @Transient
     protected int HP;
 
     @Column
@@ -30,6 +31,8 @@ public class Actor {
 
     @ManyToMany
     private List<Item> inventory;
+
+
 
     public Actor(String name, int maxHP) {
         this.name = name;
