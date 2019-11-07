@@ -24,6 +24,4 @@ public class PlayableActor extends Actor {
     public void setOwner(Account owner) {
         this.owner = owner;
     }
-
-
 }

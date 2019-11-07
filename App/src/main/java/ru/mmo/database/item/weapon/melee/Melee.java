@@ -1,5 +1,6 @@
 package ru.mmo.database.item.weapon.melee;
 
+import ru.mmo.database.item.weapon.WeaponPosition;
 import ru.mmo.database.item.weapon.melee.combo.Combo;
 import ru.mmo.database.item.weapon.Weapon;
 
@@ -15,7 +16,7 @@ public class Melee extends Weapon {
     @Transient
     protected float damage;
 
-    public Melee(String name, String pos) {
+    public Melee(String name, WeaponPosition pos) {
         super(name, pos);
     }
 

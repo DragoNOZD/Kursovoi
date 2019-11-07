@@ -1,5 +1,6 @@
 package ru.mmo.database.item.weapon.ranged;
 
+import ru.mmo.database.item.weapon.WeaponPosition;
 import ru.mmo.database.item.weapon.ranged.projectile.Projectile;
 import ru.mmo.database.item.weapon.Weapon;
 
@@ -12,7 +13,7 @@ public class Ranged extends Weapon {
     @ManyToOne
     protected Projectile projectile;
 
-    public Ranged(String name, String pos) {
+    public Ranged(String name, WeaponPosition pos) {
         super(name, pos);
     }
 

@@ -9,18 +9,18 @@ import javax.persistence.*;
 public class Weapon extends Item {
 
     @Column
-    protected String pos;
+    protected WeaponPosition pos;
 
-    public Weapon(String name, String pos) {
+    public Weapon(String name, WeaponPosition pos) {
         super(name);
         this.pos = pos;
     }
 
-    public String getPos() {
+    public WeaponPosition getPos() {
         return pos;
     }
 
-    public void setPos(String pos) {
+    public void setPos(WeaponPosition pos) {
         this.pos = pos;
     }
 }
