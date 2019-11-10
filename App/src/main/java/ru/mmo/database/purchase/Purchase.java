@@ -9,8 +9,8 @@ import javax.persistence.*;
 public class Purchase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Purchase_generator")
+    @SequenceGenerator(name = "Purchase_generator", sequenceName = "Purchase_sequence")
     private long id;
 
     @ManyToOne

@@ -7,7 +7,8 @@ import java.util.List;
 public class QuestPart {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "QuestPart_generator")
+    @SequenceGenerator(name = "QuestPart_generator", sequenceName = "QuestPart_sequence")
     protected long id;
 
     @Column

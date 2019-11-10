@@ -9,7 +9,4 @@ import java.util.List;
 
 public interface ComboRepository extends JpaRepository<Combo, Long> {
 
-    @Query("SELECT c from Combo c where c.weapon = :weaponn")
-    List<Combo> getAllByWeapon(@Param("weapon") Melee weapon);
-
 }

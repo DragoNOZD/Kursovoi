@@ -1,46 +1,23 @@
 package ru.mmo.database.item.weapon.ranged.projectile;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import ru.mmo.database.item.Item;
+
+import javax.persistence.*;
 
 @Entity
-public class Projectile {
-
-    @Id
-    @GeneratedValue
-    private long id;
-
-    @Column
-    private String name;
+public class Projectile extends Item {
 
     @Column
     private float damage;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private ProjectileType type;
 
     public Projectile(String name, float damage, ProjectileType type) {
-        this.name = name;
+        super(name);
         this.damage = damage;
         this.type = type;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public float getDamage() {

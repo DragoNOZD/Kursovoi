@@ -37,11 +37,6 @@ public class ComboServiceImpl implements ComboService {
     }
 
     @Override
-    public List<Combo> getAllByWepon(Melee melee) {
-        return repository.getAllByWeapon(melee);
-    }
-
-    @Override
     public List<Combo> getAll() {
         return repository.findAll();
     }

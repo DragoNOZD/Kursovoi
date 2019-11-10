@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Weapon extends Item {
 
+    @Enumerated(EnumType.STRING)
     @Column
     protected WeaponPosition pos;
 

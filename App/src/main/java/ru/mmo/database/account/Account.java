@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "Account_entity")
 public class Account {
+
     @Id
     @Column(nullable = false)
     private String login;
@@ -79,6 +80,10 @@ public class Account {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public void setFriends(List<Account> friends) {
+        this.friends = friends;
     }
 
     public List<Account> getFriends() {

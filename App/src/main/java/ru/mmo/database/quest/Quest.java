@@ -1,16 +1,19 @@
 package ru.mmo.database.quest;
 
 import ru.mmo.database.actor.npc.NPC;
+import ru.mmo.database.actor.playable.PlayableActor;
 import ru.mmo.database.quest.questparts.QuestPart;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Quest {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Quest_generator")
+    @SequenceGenerator(name = "Quest_generator", sequenceName = "Quest_sequence")
     protected long id;
 
     @Column
@@ -18,6 +21,7 @@ public class Quest {
 
     // reward
 
+    @Enumerated(EnumType.STRING)
     @Column
     protected QuestType type;
 
@@ -26,6 +30,14 @@ public class Quest {
 
     @OneToMany
     protected List<QuestPart> parts;
+
+    @ElementCollection
+    @CollectionTable(name = "accepted_quests",
+            joinColumns = { @JoinColumn(name = "quest") }
+    )
+    @MapKeyJoinColumn(name = "actor")
+    @Column(name = "IsCompleted")
+    protected Map<PlayableActor, Boolean> actors;
 
     public Quest(String name, QuestType type, NPC npc) {
         this.name = name;

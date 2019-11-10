@@ -1,28 +1,29 @@
 package ru.mmo.database.item.weapon.melee.combo;
 
-import ru.mmo.database.item.weapon.melee.Melee;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Combo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Combo_generator")
+    @SequenceGenerator(name = "Combo_generator", sequenceName = "Combo_sequence")
     private long id;
-
-    @ManyToOne
-    private Melee weapon;
 
     @Column
     private float damage;
 
-    @Column
-    private String sequence;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
+    private List<Action> seq;
 
-    public Combo(float damage, String sequence) {
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
+    private List<Condition> conditions;
+
+    public Combo(float damage) {
         this.damage = damage;
-        this.sequence = sequence;
     }
 
     public long getId() {
@@ -33,14 +34,6 @@ public class Combo {
         this.id = id;
     }
 
-    public Melee getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Melee weapon) {
-        this.weapon = weapon;
-    }
-
     public float getDamage() {
         return damage;
     }
@@ -49,11 +42,19 @@ public class Combo {
         this.damage = damage;
     }
 
-    public String getSequence() {
-        return sequence;
+    public List<Action> getSeq() {
+        return seq;
     }
 
-    public void setSequence(String sequence) {
-        this.sequence = sequence;
+    public void setSeq(List<Action> seq) {
+        this.seq = seq;
+    }
+
+    public List<Condition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Condition> conditions) {
+        this.conditions = conditions;
     }
 }

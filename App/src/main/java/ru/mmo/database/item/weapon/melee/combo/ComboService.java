@@ -9,6 +9,5 @@ public interface ComboService {
     void deleteCombo(Combo combo);
     void updateCombo(Combo combo);
     Combo getCombo(Long id);
-    List<Combo> getAllByWepon(Melee melee);
     List<Combo> getAll();
 }

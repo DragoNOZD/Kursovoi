@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Item {
 
     @Id
-    @GeneratedValue
-    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Item_generator")
+    @SequenceGenerator(name = "Item_generator", sequenceName = "Item_sequence")
     protected long id;
 
     @Column

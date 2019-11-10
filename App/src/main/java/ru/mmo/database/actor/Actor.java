@@ -1,17 +1,29 @@
 package ru.mmo.database.actor;
 
-import ru.mmo.database.Vector;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import ru.mmo.database.actor.skills.Skill;
+import ru.mmo.database.hibernatetypes.vector.Vector;
+import ru.mmo.database.hibernatetypes.vector.VectorHibernateType;
 import ru.mmo.database.item.Item;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@TypeDefs({
+        @TypeDef(typeClass = boolean.class, defaultForType = Boolean.class, name = "boolean"),
+        @TypeDef(typeClass = VectorHibernateType.class, defaultForType = Vector.class, name = "Vector")
+})
 public class Actor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "Actor_generator")
+    @SequenceGenerator(name = "Actor_generator",
+            sequenceName = "Actor_sequence")
     protected long id;
 
     @Column
@@ -26,13 +38,19 @@ public class Actor {
     @Transient
     protected int HP;
 
-    @Column
+    @Column(columnDefinition = "vector3")
     protected Vector location;
 
     @ManyToMany
-    private List<Item> inventory;
+    protected List<Item> inventory;
 
-
+    @ElementCollection
+    @CollectionTable(name = "actor_skills",
+            joinColumns = { @JoinColumn(name = "actor") }
+    )
+    @MapKeyJoinColumn(name = "skill")
+    @Column(name = "IsEquipped")
+    protected Map<Skill, Boolean> skills;
 
     public Actor(String name, int maxHP) {
         this.name = name;
@@ -93,5 +111,13 @@ public class Actor {
 
     public void setInventory(List<Item> inventory) {
         this.inventory = inventory;
+    }
+
+    public Map<Skill, Boolean> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Map<Skill, Boolean> skills) {
+        this.skills = skills;
     }
 }
