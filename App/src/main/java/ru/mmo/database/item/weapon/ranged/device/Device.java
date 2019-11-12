@@ -6,7 +6,6 @@ import ru.mmo.database.item.weapon.ranged.Ranged;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Device extends Item {
 
     @Enumerated(EnumType.STRING)

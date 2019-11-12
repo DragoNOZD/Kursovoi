@@ -1,6 +1,6 @@
 package ru.mmo.database.item;
 
-public class Rarity {
+public final class Rarity {
     public static final long U = 1;
     public static final long L = 20000;
     public static final long F = 100000;

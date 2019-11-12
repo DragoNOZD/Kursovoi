@@ -1,7 +1,7 @@
 package ru.mmo.database.item.weapon.ranged;
 
 import ru.mmo.database.item.weapon.Weapon;
-import ru.mmo.database.item.weapon.WeaponPosition;
+import ru.mmo.database.item.weapon.WeaponMount;
 import ru.mmo.database.item.weapon.ranged.device.Device;
 import ru.mmo.database.item.weapon.ranged.projectile.Projectile;
 
@@ -11,8 +11,13 @@ import java.util.Map;
 @Entity
 public class Ranged extends Weapon {
 
-    @ManyToOne
-    protected Projectile projectile;
+    @ElementCollection
+    @CollectionTable(name = "ranged_projectiles",
+            joinColumns = { @JoinColumn(name = "ranged") }
+    )
+    @MapKeyJoinColumn(name = "projectile")
+    @Column(name = "IsEquipped")
+    protected Map<Projectile, Boolean> projectiles;
 
     @ElementCollection
     @CollectionTable(name = "ranged_devices",
@@ -22,16 +27,16 @@ public class Ranged extends Weapon {
     @Column(name = "IsEquipped")
     protected Map<Device, Boolean> devices;
 
-    public Ranged(String name, WeaponPosition pos) {
+    public Ranged(String name, WeaponMount pos) {
         super(name, pos);
     }
 
-    public Projectile getProjectile() {
-        return projectile;
+    public Map<Projectile, Boolean> getProjectiles() {
+        return projectiles;
     }
 
-    public void setProjectile(Projectile projectile) {
-        this.projectile = projectile;
+    public void setProjectiles(Map<Projectile, Boolean> projectiles) {
+        this.projectiles = projectiles;
     }
 
     public Map<Device, Boolean> getDevices() {

@@ -22,8 +22,14 @@ public class Combo {
     @ElementCollection
     private List<Condition> conditions;
 
+    @Column
+    private String animation = "";
+
     public Combo(float damage) {
         this.damage = damage;
+    }
+
+    public Combo() {
     }
 
     public long getId() {
@@ -56,5 +62,13 @@ public class Combo {
 
     public void setConditions(List<Condition> conditions) {
         this.conditions = conditions;
+    }
+
+    public String getAnimation() {
+        return animation;
+    }
+
+    public void setAnimation(String animation) {
+        this.animation = animation;
     }
 }

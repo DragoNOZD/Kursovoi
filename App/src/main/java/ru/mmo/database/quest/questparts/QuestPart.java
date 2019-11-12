@@ -14,7 +14,8 @@ public class QuestPart {
     @Column
     private String description;
 
-    // Object
+    @Column
+    protected String part;
 
     @ManyToMany
     protected List<QuestPart> nextParts;

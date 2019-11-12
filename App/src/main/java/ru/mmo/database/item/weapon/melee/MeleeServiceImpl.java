@@ -2,28 +2,30 @@ package ru.mmo.database.item.weapon.melee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mmo.database.item.ItemRepository;
 import ru.mmo.database.item.Rarity;
+import ru.mmo.database.item.weapon.WeaponRepository;
 
 import java.util.List;
 
 @Service
 public class MeleeServiceImpl implements MeleeService {
 
-    private MeleeRepository repository;
+    private MeleeRepository meleeRepository;
 
     @Autowired
-    public MeleeServiceImpl(MeleeRepository repository) {
-        this.repository = repository;
+    public MeleeServiceImpl(MeleeRepository meleeRepository) {
+        this.meleeRepository = meleeRepository;
     }
 
     @Override
     public void addMelee(Melee melee) {
-        repository.saveAndFlush(melee);
+        meleeRepository.saveAndFlush(melee);
     }
 
     @Override
     public void deleteMelee(Melee melee) {
-        repository.delete(melee);
+        meleeRepository.delete(melee);
     }
 
     @Override
@@ -33,22 +35,22 @@ public class MeleeServiceImpl implements MeleeService {
 
     @Override
     public Melee getMelee(Long id) {
-        return repository.getOne(id);
+        return meleeRepository.getOne(id);
     }
 
     @Override
     public List<Melee> getAll() {
-        return repository.findAll();
+        return meleeRepository.findAll();
     }
 
     @Override
     public List<Melee> getAllByRarity(Rarity rarity) {
-        return repository.getAllByRarity(rarity);
+        return meleeRepository.getAllByRarity(rarity);
     }
 
     @Override
     public List<Melee> getAllByName(String name) {
-        return repository.getAllByName(name);
+        return meleeRepository.getAllByName(name);
     }
 
 

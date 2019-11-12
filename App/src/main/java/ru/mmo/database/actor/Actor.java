@@ -2,6 +2,9 @@ package ru.mmo.database.actor;
 
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import ru.mmo.database.account.AccountService;
 import ru.mmo.database.actor.skills.Skill;
 import ru.mmo.database.hibernatetypes.vector.Vector;
 import ru.mmo.database.hibernatetypes.vector.VectorHibernateType;
@@ -14,10 +17,14 @@ import java.util.Map;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @TypeDefs({
-        @TypeDef(typeClass = boolean.class, defaultForType = Boolean.class, name = "boolean"),
-        @TypeDef(typeClass = VectorHibernateType.class, defaultForType = Vector.class, name = "Vector")
+        @TypeDef(typeClass = VectorHibernateType.class, defaultForType = Vector.class)
 })
+@Configurable
 public class Actor {
+
+    @Autowired
+    @Transient
+    private ActorService service;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -41,6 +48,9 @@ public class Actor {
     @Column(columnDefinition = "vector3")
     protected Vector location;
 
+    @Column
+    protected String mesh;
+
     @ManyToMany
     protected List<Item> inventory;
 
@@ -55,6 +65,13 @@ public class Actor {
     public Actor(String name, int maxHP) {
         this.name = name;
         this.maxHP = maxHP;
+    }
+
+    public Actor() {
+    }
+
+    private void updateActor(){
+        service.updateCharacter(this);
     }
 
     public long getId() {
@@ -119,5 +136,21 @@ public class Actor {
 
     public void setSkills(Map<Skill, Boolean> skills) {
         this.skills = skills;
+    }
+
+    public ActorService getService() {
+        return service;
+    }
+
+    public void setService(ActorService service) {
+        this.service = service;
+    }
+
+    public String getMesh() {
+        return mesh;
+    }
+
+    public void setMesh(String mesh) {
+        this.mesh = mesh;
     }
 }

@@ -15,6 +15,9 @@ public class Item {
     protected String name;
 
     @Column
+    protected String mesh;
+
+    @Column
     protected long rarity = Rarity.C;
 
     public Item(String name) {
