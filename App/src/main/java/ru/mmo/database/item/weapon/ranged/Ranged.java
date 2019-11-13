@@ -17,7 +17,7 @@ public class Ranged extends Weapon {
     )
     @MapKeyJoinColumn(name = "projectile")
     @Column(name = "IsEquipped")
-    protected Map<Projectile, Boolean> projectiles;
+    private Map<Projectile, Boolean> projectiles;
 
     @ElementCollection
     @CollectionTable(name = "ranged_devices",
@@ -25,10 +25,25 @@ public class Ranged extends Weapon {
     )
     @MapKeyJoinColumn(name = "device")
     @Column(name = "IsEquipped")
-    protected Map<Device, Boolean> devices;
+    private Map<Device, Boolean> devices;
+
+    @Column
+    private int projectileStartSpeed;
+
+    @Column
+    private int maxMagazineCount;
+
+    @Transient
+    private int magazineCount;
+
+    @Column
+    private String recoilCurve;
 
     public Ranged(String name, WeaponMount pos) {
         super(name, pos);
+    }
+
+    public Ranged() {
     }
 
     public Map<Projectile, Boolean> getProjectiles() {
@@ -45,5 +60,37 @@ public class Ranged extends Weapon {
 
     public void setDevices(Map<Device, Boolean> devices) {
         this.devices = devices;
+    }
+
+    public int getProjectileStartSpeed() {
+        return projectileStartSpeed;
+    }
+
+    public void setProjectileStartSpeed(int projectileStartSpeed) {
+        this.projectileStartSpeed = projectileStartSpeed;
+    }
+
+    public int getMaxMagazineCount() {
+        return maxMagazineCount;
+    }
+
+    public void setMaxMagazineCount(int maxMagazineCount) {
+        this.maxMagazineCount = maxMagazineCount;
+    }
+
+    public int getMagazineCount() {
+        return magazineCount;
+    }
+
+    public void setMagazineCount(int magazineCount) {
+        this.magazineCount = magazineCount;
+    }
+
+    public String getRecoilCurve() {
+        return recoilCurve;
+    }
+
+    public void setRecoilCurve(String recoilCurve) {
+        this.recoilCurve = recoilCurve;
     }
 }

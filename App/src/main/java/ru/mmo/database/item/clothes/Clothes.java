@@ -5,28 +5,27 @@ import ru.mmo.database.item.Item;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Clothes extends Item {
 
     @Column
-    protected int damageReductionPercentage;
+    private int damageReduction;
 
     @Enumerated(EnumType.STRING)
     @Column
-    protected ClothesType type;
+    private ClothesType type;
 
-    public Clothes(String name, int damageReductionPercentage, ClothesType type) {
+    public Clothes(String name, int damageReduction, ClothesType type) {
         super(name);
-        this.damageReductionPercentage = damageReductionPercentage;
+        this.damageReduction = damageReduction;
         this.type = type;
     }
 
-    public int getDamageReductionPercentage() {
-        return damageReductionPercentage;
+    public int getDamageReduction() {
+        return damageReduction;
     }
 
-    public void setDamageReductionPercentage(int damageReductionPercentage) {
-        this.damageReductionPercentage = damageReductionPercentage;
+    public void setDamageReduction(int damageReduction) {
+        this.damageReduction = damageReduction;
     }
 
     public ClothesType getType() {

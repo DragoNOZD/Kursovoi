@@ -23,6 +23,9 @@ public class Weapon extends Item {
         this.pos = pos;
     }
 
+    public Weapon() {
+    }
+
     public WeaponMount getPos() {
         return pos;
     }

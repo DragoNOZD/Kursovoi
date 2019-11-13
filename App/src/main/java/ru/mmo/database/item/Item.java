@@ -24,6 +24,9 @@ public class Item {
         this.name = name;
     }
 
+    public Item() {
+    }
+
     public long getId() {
         return id;
     }
