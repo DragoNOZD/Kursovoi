@@ -1,9 +1,18 @@
 package ru.mmo.database.item;
 
-public final class Rarity {
-    public static final long U = 1;
-    public static final long L = 20000;
-    public static final long F = 100000;
-    public static final long R = 1000000;
-    public static final long C = 999999999;
+public enum Rarity {
+    U(1),
+    L(20000),
+    F(100000),
+    R(1000000),
+    C(999999999);
+
+    long count;
+    Rarity(long count) {
+        this.count = count;
+    }
+
+    public long getCount() {
+        return count;
+    }
 }

@@ -49,7 +49,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean checkPassword(String login, String password) {
-        return accountRepository.getOne(login).checkPassword(password);
+    public List<Account> getAllByCountry(Country country) {
+        return accountRepository.getAllByCountry(country);
+    }
+
+    @Override
+    public List<Account> getAllByName(String name) {
+        return accountRepository.getAllByName(name);
+    }
+
+    @Override
+    public Account getByEmail(String email) {
+        return accountRepository.getByEmail(email);
     }
 }

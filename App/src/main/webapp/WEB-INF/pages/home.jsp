@@ -12,8 +12,5 @@
 	        <a href="${pageContext.request.contextPath}/login">Sign In</a>
 	        <a href="${pageContext.request.contextPath}/signUp">Sign Up</a>
         </div>
-        <div>
-            <a href="${pageContext.request.contextPath}/purchase">Buy Game</a>
-        </div>
     </body>
 </html>

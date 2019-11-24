@@ -5,20 +5,19 @@ import ru.mmo.database.actor.Actor;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Skill_generator")
     @SequenceGenerator(name = "Skill_generator", sequenceName = "Skill_sequence")
-    protected long id;
+    private long id;
 
     @Column
-    protected float val;
+    private float val;
 
     @Enumerated(EnumType.STRING)
     @Column
-    protected SkillType type;
+    private SkillType type;
 
     public Skill() {
     }

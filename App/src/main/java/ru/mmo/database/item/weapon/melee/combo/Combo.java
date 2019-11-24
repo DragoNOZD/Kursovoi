@@ -1,10 +1,27 @@
 package ru.mmo.database.item.weapon.melee.combo;
 
+import com.vladmihalcea.hibernate.type.array.EnumArrayType;
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import ru.mmo.database.item.weapon.melee.Melee;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@TypeDefs(
+        @TypeDef(name = "varchar[]", typeClass = StringArrayType.class)
+)
+@Configurable
 public class Combo {
+
+    @Autowired
+    @Transient
+    private ComboService service;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Combo_generator")
@@ -15,21 +32,31 @@ public class Combo {
     private float damage;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
-    private List<Action> seq;
+    @Type(type = "varchar[]")
+    @Column(columnDefinition = "varchar(255)[]")
+    private List<Action> sequence;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
+    @Type(type = "varchar[]")
+    @Column(columnDefinition = "varchar(255)[]")
     private List<Condition> conditions;
 
     @Column
     private String animation = "";
 
+    @ManyToOne
+    private Melee weapon;
+
     public Combo(float damage) {
         this.damage = damage;
+        service.addCombo(this);
     }
 
     public Combo() {
+    }
+
+    private void updateCombo(){
+        service.updateCombo(this);
     }
 
     public long getId() {
@@ -38,6 +65,7 @@ public class Combo {
 
     public void setId(long id) {
         this.id = id;
+        updateCombo();
     }
 
     public float getDamage() {
@@ -46,14 +74,15 @@ public class Combo {
 
     public void setDamage(float damage) {
         this.damage = damage;
+        updateCombo();
     }
 
-    public List<Action> getSeq() {
-        return seq;
+    public List<Action> getSequence() {
+        return sequence;
     }
 
-    public void setSeq(List<Action> seq) {
-        this.seq = seq;
+    public void setSequence(List<Action> sequence) {
+        this.sequence = sequence;
     }
 
     public List<Condition> getConditions() {
@@ -70,5 +99,22 @@ public class Combo {
 
     public void setAnimation(String animation) {
         this.animation = animation;
+        updateCombo();
+    }
+
+    public Melee getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Melee weapon) {
+        this.weapon = weapon;
+    }
+
+    public ComboService getService() {
+        return service;
+    }
+
+    public void setService(ComboService service) {
+        this.service = service;
     }
 }

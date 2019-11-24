@@ -3,29 +3,28 @@ package ru.mmo.database.item.usable;
 import ru.mmo.database.actor.Actor;
 import ru.mmo.database.item.Item;
 
-import javax.persistence.Column;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usable extends Item {
 
+    @Enumerated(EnumType.STRING)
     @Column
-    protected UsableItemType itemType;
+    protected UsableItemType item;
 
-    public Usable(String name, UsableItemType itemType) {
+    public Usable(String name, UsableItemType item) {
         super(name);
-        this.itemType = itemType;
+        this.item = item;
     }
 
-    public UsableItemType getItemType() {
-        return itemType;
+    public UsableItemType getItem() {
+        return item;
     }
 
-    public void setItemType(UsableItemType itemType) {
-        this.itemType = itemType;
+    public void setItem(UsableItemType item) {
+        this.item = item;
     }
 
     public void use(Actor actor){

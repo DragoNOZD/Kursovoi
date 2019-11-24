@@ -2,6 +2,7 @@ package ru.mmo.database.item.weapon;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mmo.database.item.Rarity;
 
 import java.util.List;
 
@@ -38,5 +39,20 @@ public class WeaponServiceImpl implements WeaponService{
     @Override
     public List<Weapon> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Weapon> getAllByName(String name) {
+        return repository.getAllByName(name);
+    }
+
+    @Override
+    public List<Weapon> getAllByRarity(Rarity rarity) {
+        return repository.getAllByRarity(rarity);
+    }
+
+    @Override
+    public List<Weapon> getAllByMount(WeaponMount mount) {
+        return repository.getAllByMount(mount);
     }
 }

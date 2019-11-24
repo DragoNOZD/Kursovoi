@@ -4,7 +4,6 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import ru.mmo.database.account.AccountService;
 import ru.mmo.database.actor.skills.Skill;
 import ru.mmo.database.hibernatetypes.vector.Vector;
 import ru.mmo.database.hibernatetypes.vector.VectorHibernateType;
@@ -37,13 +36,10 @@ public class Actor {
     protected String name;
 
     @Column
-    protected int maxHP;
-
-    @Column
-    protected int HPPersentage;
+    protected float maxHP;
 
     @Transient
-    protected int HP;
+    protected float HP;
 
     @Column(columnDefinition = "vector3")
     protected Vector location;
@@ -51,8 +47,13 @@ public class Actor {
     @Column
     protected String mesh;
 
-    @ManyToMany
-    protected List<Item> inventory;
+    @ElementCollection
+    @CollectionTable(name = "inventory",
+            joinColumns = { @JoinColumn(name = "actor") }
+    )
+    @MapKeyJoinColumn(name = "item")
+    @Column(name = "actor_slot_or_count")
+    protected Map<Item, Integer> inventory;
 
     @ElementCollection
     @CollectionTable(name = "actor_skills",
@@ -62,15 +63,14 @@ public class Actor {
     @Column(name = "IsEquipped")
     protected Map<Skill, Boolean> skills;
 
-    public Actor(String name, int maxHP) {
+    public Actor(String name) {
         this.name = name;
-        this.maxHP = maxHP;
     }
 
     public Actor() {
     }
 
-    private void updateActor(){
+    public void updateActor(){
         service.updateCharacter(this);
     }
 
@@ -90,27 +90,25 @@ public class Actor {
         this.name = name;
     }
 
-    public int getMaxHP() {
+    public float getMaxHP() {
         return maxHP;
     }
 
-    public void setMaxHP(int maxHP) {
+    public void setMaxHP(float maxHP) {
         this.maxHP = maxHP;
     }
 
-    public int getHPPersentage() {
-        return HPPersentage;
+    public int getHPPercentage() {
+        int percentage;
+        percentage = (int)(maxHP*100/HP);
+        return percentage;
     }
 
-    public void setHPPersentage(int HPPersentage) {
-        this.HPPersentage = HPPersentage;
-    }
-
-    public int getHP() {
+    public float getHP() {
         return HP;
     }
 
-    public void setHP(int HP) {
+    public void setHP(float HP) {
         this.HP = HP;
     }
 
@@ -122,11 +120,11 @@ public class Actor {
         this.location = location;
     }
 
-    public List<Item> getInventory() {
+    public Map<Item, Integer> getInventory() {
         return inventory;
     }
 
-    public void setInventory(List<Item> inventory) {
+    public void setInventory(Map<Item, Integer> inventory) {
         this.inventory = inventory;
     }
 
@@ -136,10 +134,6 @@ public class Actor {
 
     public void setSkills(Map<Skill, Boolean> skills) {
         this.skills = skills;
-    }
-
-    public ActorService getService() {
-        return service;
     }
 
     public void setService(ActorService service) {

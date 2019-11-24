@@ -10,7 +10,7 @@ public class Weapon extends Item {
 
     @Enumerated(EnumType.STRING)
     @Column
-    protected WeaponMount pos;
+    protected WeaponMount mount;
 
     @Column
     protected String takeAnimation;
@@ -18,20 +18,20 @@ public class Weapon extends Item {
     @Column
     protected String putAnimation;
 
-    public Weapon(String name, WeaponMount pos) {
+    public Weapon(String name, WeaponMount mount) {
         super(name);
-        this.pos = pos;
+        this.mount = mount;
     }
 
     public Weapon() {
     }
 
-    public WeaponMount getPos() {
-        return pos;
+    public WeaponMount getMount() {
+        return mount;
     }
 
-    public void setPos(WeaponMount pos) {
-        this.pos = pos;
+    public void setMount(WeaponMount mount) {
+        this.mount = mount;
     }
 
     public String getTakeAnimation() {

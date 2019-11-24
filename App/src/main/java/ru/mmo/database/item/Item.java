@@ -17,8 +17,9 @@ public class Item {
     @Column
     protected String mesh;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    protected long rarity = Rarity.C;
+    protected Rarity rarity = Rarity.C;
 
     public Item(String name) {
         this.name = name;
@@ -43,11 +44,22 @@ public class Item {
         this.name = name;
     }
 
-    public long getRarity() {
+    public String getMesh() {
+        return mesh;
+    }
+
+    public void setMesh(String mesh) {
+        this.mesh = mesh;
+    }
+
+    public Rarity getRarity() {
+
+        long c = rarity.getCount();
+
         return rarity;
     }
 
-    public void setRarity(long rarity) {
+    public void setRarity(Rarity rarity) {
         this.rarity = rarity;
     }
 }

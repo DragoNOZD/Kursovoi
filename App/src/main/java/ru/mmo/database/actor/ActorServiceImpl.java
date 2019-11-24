@@ -2,8 +2,10 @@ package ru.mmo.database.actor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mmo.database.actor.skills.Skill;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ActorServiceImpl implements ActorService {

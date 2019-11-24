@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Clothes extends Item {
 
     @Column
-    private int damageReduction;
+    private double damageReduction;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -20,11 +20,11 @@ public class Clothes extends Item {
         this.type = type;
     }
 
-    public int getDamageReduction() {
+    public double getDamageReduction() {
         return damageReduction;
     }
 
-    public void setDamageReduction(int damageReduction) {
+    public void setDamageReduction(double damageReduction) {
         this.damageReduction = damageReduction;
     }
 

@@ -28,7 +28,7 @@ public class Ranged extends Weapon {
     private Map<Device, Boolean> devices;
 
     @Column
-    private int projectileStartSpeed;
+    private double projectileStartSpeed;
 
     @Column
     private int maxMagazineCount;
@@ -62,11 +62,11 @@ public class Ranged extends Weapon {
         this.devices = devices;
     }
 
-    public int getProjectileStartSpeed() {
+    public double getProjectileStartSpeed() {
         return projectileStartSpeed;
     }
 
-    public void setProjectileStartSpeed(int projectileStartSpeed) {
+    public void setProjectileStartSpeed(double projectileStartSpeed) {
         this.projectileStartSpeed = projectileStartSpeed;
     }
 

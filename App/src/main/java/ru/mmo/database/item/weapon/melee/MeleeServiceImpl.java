@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.mmo.database.item.ItemRepository;
 import ru.mmo.database.item.Rarity;
+import ru.mmo.database.item.weapon.WeaponMount;
 import ru.mmo.database.item.weapon.WeaponRepository;
 
 import java.util.List;
@@ -53,5 +54,8 @@ public class MeleeServiceImpl implements MeleeService {
         return meleeRepository.getAllByName(name);
     }
 
-
+    @Override
+    public List<Melee> getAllByMount(WeaponMount mount) {
+        return meleeRepository.getAllByMount(mount);
+    }
 }

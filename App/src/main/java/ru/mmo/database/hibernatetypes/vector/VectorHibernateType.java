@@ -24,8 +24,8 @@ public class VectorHibernateType implements UserType {
 
     @Override
     public boolean equals(Object o, Object o1) throws HibernateException {
-        if (o == null || o1 == null){
-            return false;
+        if (o == null){
+            return o1 == null;
         }
         return o.equals(o1);
     }

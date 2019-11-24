@@ -17,7 +17,7 @@ public class QuestPart {
     @Column
     protected String part;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     protected List<QuestPart> nextParts;
 
     public QuestPart() {

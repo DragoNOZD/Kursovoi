@@ -8,5 +8,7 @@ public interface AccountService {
     void deleteUser(String login);
     Account getByLogin(String login);
     List<Account> getAll();
-    boolean checkPassword(String login, String password);
+    List<Account> getAllByCountry(Country country);
+    List<Account> getAllByName(String name);
+    Account getByEmail(String email);
 }
