@@ -10,7 +10,6 @@ import ru.mmo.database.hibernatetypes.vector.VectorHibernateType;
 import ru.mmo.database.item.Item;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -20,10 +19,6 @@ import java.util.Map;
 })
 @Configurable
 public class Actor {
-
-    @Autowired
-    @Transient
-    private ActorService service;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -70,10 +65,6 @@ public class Actor {
     public Actor() {
     }
 
-    public void updateActor(){
-        service.updateCharacter(this);
-    }
-
     public long getId() {
         return id;
     }
@@ -99,9 +90,7 @@ public class Actor {
     }
 
     public int getHPPercentage() {
-        int percentage;
-        percentage = (int)(maxHP*100/HP);
-        return percentage;
+        return (int)(maxHP*100/HP);
     }
 
     public float getHP() {
@@ -134,10 +123,6 @@ public class Actor {
 
     public void setSkills(Map<Skill, Boolean> skills) {
         this.skills = skills;
-    }
-
-    public void setService(ActorService service) {
-        this.service = service;
     }
 
     public String getMesh() {
