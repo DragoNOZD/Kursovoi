@@ -38,11 +38,6 @@ public class PlayableActor extends Actor {
     public PlayableActor() {
     }
 
-    @Override
-    public void updateActor(){
-        service.updateActor(this);
-    }
-
     public Account getOwner() {
         return owner;
     }
