@@ -1,8 +1,6 @@
 package ru.mmo.database.controllers;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model){
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
@@ -33,10 +31,10 @@ public class LoginController {
         Account account = accountService.getByLogin(login);
         if (account == null){
             model.addAttribute("warning", "User \"" + login + "\" is not exists.");
-            return "login";
+            return "user/login";
         } else if (!account.checkPassword(password)) {
             model.addAttribute("warning", "Password is not correct.");
-            return "login";
+            return "user/login";
         }
         return "redirect:/users/" + login;
     }

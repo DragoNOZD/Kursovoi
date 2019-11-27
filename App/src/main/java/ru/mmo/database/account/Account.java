@@ -19,13 +19,13 @@ public class Account {
     private String password;
 
     @Column
-    private String name;
+    private String name = "";
 
     @ManyToMany
     private List<Account> friends;
 
     @Column
-    private String image;
+    private String image = "";
 
     @Column(unique = true)
     private String email;

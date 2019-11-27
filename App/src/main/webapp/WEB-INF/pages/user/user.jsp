@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=windows-1252" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +15,7 @@
     </head>
     <body class="red">
         <div>
-            <p>Da, ${login}</p>
+            <p>Hello, ${login}</p>
         </div>
     </body>
 </html>

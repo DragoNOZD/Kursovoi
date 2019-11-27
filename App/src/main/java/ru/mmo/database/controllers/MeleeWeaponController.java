@@ -11,12 +11,12 @@ import ru.mmo.database.item.weapon.melee.Melee;
 import ru.mmo.database.item.weapon.melee.MeleeService;
 
 @Controller
-public class WeaponController {
+public class MeleeWeaponController {
 
     private MeleeService meleeService;
 
     @Autowired
-    public WeaponController(MeleeService meleeService) {
+    public MeleeWeaponController(MeleeService meleeService) {
         this.meleeService = meleeService;
     }
 

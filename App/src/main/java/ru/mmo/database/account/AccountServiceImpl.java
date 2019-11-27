@@ -62,4 +62,9 @@ public class AccountServiceImpl implements AccountService {
     public Account getByEmail(String email) {
         return accountRepository.getByEmail(email);
     }
+
+    @Override
+    public List<Account> getAllLimited(int from, int to) {
+        return null;
+    }
 }

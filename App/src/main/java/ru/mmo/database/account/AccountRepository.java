@@ -16,4 +16,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("select a from Account a where a.name = :name")
 	List<Account> getAllByName(@Param("name") String name);
+
+	//@Query("select a from Account limit :to offset :fromL ")
+	//List<Account> getAllLimited(@Param("fromL") int from, @Param("to") int to);
 }

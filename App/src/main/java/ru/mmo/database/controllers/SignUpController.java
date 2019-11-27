@@ -21,7 +21,7 @@ public class SignUpController {
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String signUp(Model model){
-        return "signup";
+        return "user/signup";
     }
 
     @RequestMapping(value = "/signUpCheck", method = RequestMethod.POST)
@@ -30,7 +30,7 @@ public class SignUpController {
                               @RequestParam("password") String password) {
         if (accountService.getByLogin(login) != null){
             model.addAttribute("warning", "Login \"" + login + "\" is already used.");
-            return "signup";
+            return "user/signup";
         }
         accountService.addUser(new Account(login, password));
         return "redirect:/users/" + login;
