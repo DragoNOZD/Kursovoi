@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mmo.database.account.Account;
 import ru.mmo.database.account.AccountService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -21,8 +23,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users")
-    public String users(Model model){
-        model.addAttribute("accounts", accountService.getAll());
+    public String users(Model model,
+                        @RequestParam(value = "countPerPage", defaultValue = "20") int countPerPage,
+                        @RequestParam(value = "page", defaultValue = "0") int page){
+        List<Integer> pages = new ArrayList<>();
+        long pagesCount = accountService.getEntitiesCount()/countPerPage;
+        for (int i = 0; i <= pagesCount; i++){
+            if (i != page) {
+                pages.add(i);
+            }
+        }
+        if (page > 0){
+            model.addAttribute("prevPage", page-1);
+        }
+        if (page + 1 <= pagesCount){
+            model.addAttribute("nextPage", page+1);
+        }
+        int from = countPerPage*page;
+        model.addAttribute("accounts", accountService.getAllLimited(from, countPerPage))
+                .addAttribute("pages", pages)
+                .addAttribute("countPerPage", countPerPage);
         return "user/users";
     }
 

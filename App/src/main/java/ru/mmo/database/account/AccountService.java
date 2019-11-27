@@ -12,4 +12,5 @@ public interface AccountService {
     List<Account> getAllByName(String name);
     Account getByEmail(String email);
     List<Account> getAllLimited(int from, int to);
+    Long getEntitiesCount();
 }

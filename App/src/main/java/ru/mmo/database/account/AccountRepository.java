@@ -1,5 +1,6 @@
 package ru.mmo.database.account;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,4 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
 	@Query("select a from Account a where a.name = :name")
 	List<Account> getAllByName(@Param("name") String name);
-
-	//@Query("select a from Account limit :to offset :fromL ")
-	//List<Account> getAllLimited(@Param("fromL") int from, @Param("to") int to);
 }

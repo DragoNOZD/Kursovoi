@@ -2,6 +2,7 @@ package ru.mmo.database.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mmo.database.hibernate.OffsetBasedPageRequest;
 
 import java.util.List;
 
@@ -64,7 +65,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAllLimited(int from, int to) {
-        return null;
+    public List<Account> getAllLimited(int from, int count) {
+        return accountRepository.findAll(new OffsetBasedPageRequest(count, from, "login")).getContent();
+    }
+
+    @Override
+    public Long getEntitiesCount() {
+        return accountRepository.count();
     }
 }

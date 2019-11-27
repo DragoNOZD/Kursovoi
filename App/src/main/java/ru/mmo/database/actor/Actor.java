@@ -2,11 +2,9 @@ package ru.mmo.database.actor;
 
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import ru.mmo.database.actor.skills.Skill;
-import ru.mmo.database.hibernatetypes.vector.Vector;
-import ru.mmo.database.hibernatetypes.vector.VectorHibernateType;
+import ru.mmo.database.hibernate.types.vector.Vector;
+import ru.mmo.database.hibernate.types.vector.VectorHibernateType;
 import ru.mmo.database.item.Item;
 
 import javax.persistence.*;
@@ -17,7 +15,6 @@ import java.util.Map;
 @TypeDefs({
         @TypeDef(typeClass = VectorHibernateType.class, defaultForType = Vector.class)
 })
-@Configurable
 public class Actor {
 
     @Id

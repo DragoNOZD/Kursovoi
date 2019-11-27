@@ -1,4 +1,4 @@
-package ru.mmo.database.hibernatetypes.vector;
+package ru.mmo.database.hibernate.types.vector;
 
 import java.io.Serializable;
 

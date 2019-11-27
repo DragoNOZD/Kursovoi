@@ -1,4 +1,4 @@
-package ru.mmo.database.hibernatetypes.vector;
+package ru.mmo.database.hibernate.types.vector;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

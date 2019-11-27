@@ -1,12 +1,9 @@
 package ru.mmo.database.item.weapon.melee.combo;
 
-import com.vladmihalcea.hibernate.type.array.EnumArrayType;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import ru.mmo.database.item.weapon.melee.Melee;
 
 import javax.persistence.*;
@@ -16,12 +13,7 @@ import java.util.List;
 @TypeDefs(
         @TypeDef(name = "varchar[]", typeClass = StringArrayType.class)
 )
-@Configurable
 public class Combo {
-
-    @Autowired
-    @Transient
-    private ComboService service;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Combo_generator")
@@ -49,15 +41,11 @@ public class Combo {
 
     public Combo(float damage) {
         this.damage = damage;
-        service.addCombo(this);
     }
 
     public Combo() {
     }
 
-    private void updateCombo(){
-        service.updateCombo(this);
-    }
 
     public long getId() {
         return id;
@@ -65,7 +53,6 @@ public class Combo {
 
     public void setId(long id) {
         this.id = id;
-        updateCombo();
     }
 
     public float getDamage() {
@@ -74,7 +61,6 @@ public class Combo {
 
     public void setDamage(float damage) {
         this.damage = damage;
-        updateCombo();
     }
 
     public List<Action> getSequence() {
@@ -99,7 +85,6 @@ public class Combo {
 
     public void setAnimation(String animation) {
         this.animation = animation;
-        updateCombo();
     }
 
     public Melee getWeapon() {
@@ -108,13 +93,5 @@ public class Combo {
 
     public void setWeapon(Melee weapon) {
         this.weapon = weapon;
-    }
-
-    public ComboService getService() {
-        return service;
-    }
-
-    public void setService(ComboService service) {
-        this.service = service;
     }
 }

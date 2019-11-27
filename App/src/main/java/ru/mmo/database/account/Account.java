@@ -1,6 +1,5 @@
 package ru.mmo.database.account;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import ru.mmo.database.actor.playable.PlayableActor;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "Account")
-@Configurable
 public class Account {
 
     @Id
