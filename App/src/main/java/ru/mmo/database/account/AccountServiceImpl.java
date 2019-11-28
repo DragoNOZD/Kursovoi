@@ -1,6 +1,7 @@
 package ru.mmo.database.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mmo.database.hibernate.OffsetBasedPageRequest;
 
@@ -11,9 +12,12 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
 
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public AccountRepository getAccountRepository() {
@@ -26,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addUser(Account account) {
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.saveAndFlush(account);
     }
 
@@ -66,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> getAllLimited(int from, int count) {
-        return accountRepository.findAll(new OffsetBasedPageRequest(count, from, "login")).getContent();
+        return accountRepository.findAll(new OffsetBasedPageRequest(count, from, "name")).getContent();
     }
 
     @Override

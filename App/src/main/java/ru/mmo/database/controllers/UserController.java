@@ -24,11 +24,11 @@ public class UserController {
 
     @RequestMapping(value = "/users")
     public String users(Model model,
-                        @RequestParam(value = "countPerPage", defaultValue = "20") int countPerPage,
+                        @RequestParam(value = "countPerPage", defaultValue = "30") int countPerPage,
                         @RequestParam(value = "page", defaultValue = "0") int page){
         List<Integer> pages = new ArrayList<>();
-        long pagesCount = accountService.getEntitiesCount()/countPerPage;
-        for (int i = 0; i <= pagesCount; i++){
+        long pagesCount = (long)Math.ceil((double)(accountService.getEntitiesCount()/countPerPage));
+        for (int i = 0; i < pagesCount; i++){
             if (i != page) {
                 pages.add(i);
             }

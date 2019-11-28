@@ -1,6 +1,7 @@
 package ru.mmo.database.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,12 @@ public class LoginController {
 
     private AccountService accountService;
 
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
-    public LoginController(AccountService accountService) {
+    public LoginController(AccountService accountService, PasswordEncoder passwordEncoder) {
         this.accountService = accountService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -32,7 +36,8 @@ public class LoginController {
         if (account == null){
             model.addAttribute("warning", "User \"" + login + "\" is not exists.");
             return "user/login";
-        } else if (!account.checkPassword(password)) {
+        }
+        if (account.checkPassword(passwordEncoder.encode(password))) {
             model.addAttribute("warning", "Password is not correct.");
             return "user/login";
         }

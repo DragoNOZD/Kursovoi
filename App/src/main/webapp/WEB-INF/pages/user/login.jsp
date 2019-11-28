@@ -18,15 +18,16 @@
 			</label>
 			<br/>
 			<label>
-				Name
-				<input name="name" required="required"/>
-			</label>
-			<label>
 				Password
 				<input type="password" name="password" required="required"/>
 			</label>
 			<br/>
-			<input type="submit" value="Sign In" />
+			<label>
+				<input type="checkbox" name="remember-me"/>
+				Remember me
+			</label>
+			<br/>
+			<input type="submit" value="Login" />
 		</form>
 	</body>
 </html>

@@ -27,7 +27,7 @@ public class SignUpController {
     @RequestMapping(value = "/signUpCheck", method = RequestMethod.POST)
     public String signUpCheck(Model model,
                               @RequestParam("login") String login,
-                              @RequestParam(value = "name", defaultValue = "") String name,
+                              @RequestParam("name") String name,
                               @RequestParam("password") String password) {
         if (accountService.getByLogin(login) != null){
             model.addAttribute("warning", "Login \"" + login + "\" is already used.");
