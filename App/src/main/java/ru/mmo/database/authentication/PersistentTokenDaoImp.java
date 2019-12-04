@@ -34,7 +34,7 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
 	@Override
 	public void updateToken(String series, String tokenValue, Date lastUsed) {
 		Session session=sessionFactory.getCurrentSession();
-		PersistentLogins logins=session.get(PersistentLogins.class, series);
+		PersistentLogins logins = session.get(PersistentLogins.class, series);
 		logins.setToken(tokenValue);
 		logins.setLastUsed(lastUsed);
 	}
@@ -54,8 +54,8 @@ public class PersistentTokenDaoImp implements PersistentTokenRepository {
 
 	@Override
 	public void removeUserTokens(String username) {
-		sessionFactory.getCurrentSession().createQuery("delete from PersistentLogins"
-				+ " where username=:userName")
+		sessionFactory.getCurrentSession().createQuery("delete from PersistentLogins p"
+				+ " where p.username=:userName")
 				.setParameter("userName", username).executeUpdate();
 	}
 }

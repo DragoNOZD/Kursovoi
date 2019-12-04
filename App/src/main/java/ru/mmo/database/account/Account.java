@@ -1,9 +1,12 @@
 package ru.mmo.database.account;
 
+import ru.mmo.database.account.role.Role;
 import ru.mmo.database.actor.playable.PlayableActor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Account")
@@ -31,6 +34,10 @@ public class Account {
     @Enumerated(EnumType.STRING)
     @Column
     private Country country = Country.NOT_SELECTED;
+
+    @ManyToMany
+    @CollectionTable(name = "account_roles")
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<PlayableActor> actors;
@@ -117,5 +124,19 @@ public class Account {
 
     public void setActors(List<PlayableActor> actors) {
         this.actors = actors;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public List<String> getRolesNames(){
+        List<String> names = new ArrayList<>();
+        roles.forEach(role -> names.add(role.getName()));
+        return names;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

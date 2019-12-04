@@ -32,7 +32,7 @@
             </#if>
         </div>
         <div>
-            CountPerPage:
+            Count per page:
             <a href="users?countPerPage=30&page=0">30 </a>
             <a href="users?countPerPage=50&page=0">50 </a>
             <a href="users?countPerPage=100&page=0">100 </a>

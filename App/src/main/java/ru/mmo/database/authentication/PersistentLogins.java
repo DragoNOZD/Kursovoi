@@ -1,9 +1,6 @@
 package ru.mmo.database.authentication;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,7 +10,7 @@ public class PersistentLogins {
 	@Id
 	private String series;
 
-	@Column(nullable = false)
+	@JoinColumn(nullable = false, table = "account", referencedColumnName = "login")
 	private String username;
 
 	@Column(nullable = false)
