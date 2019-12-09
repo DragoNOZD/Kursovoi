@@ -1,5 +1,6 @@
 package ru.mmo.database.controllers;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ public class LoginController {
 
     private PasswordEncoder passwordEncoder;
 
+    private SessionFactory sessionFactory;
+
     @Autowired
-    public LoginController(AccountService accountService, PasswordEncoder passwordEncoder) {
+    public LoginController(AccountService accountService, PasswordEncoder passwordEncoder, SessionFactory sessionFactory) {
         this.accountService = accountService;
         this.passwordEncoder = passwordEncoder;
+        this.sessionFactory = sessionFactory;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -31,7 +35,8 @@ public class LoginController {
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
     public String loginCheck(Model model,
                              @RequestParam(value = "login", defaultValue = "") String login,
-                             @RequestParam(value = "password", defaultValue = "") String password){
+                             @RequestParam(value = "password", defaultValue = "") String password,
+                             @RequestParam(value = "remember-me", defaultValue = "false") boolean remember){
         Account account = accountService.getByLogin(login);
         if (account == null){
             model.addAttribute("warning", "User \"" + login + "\" is not exists.");
@@ -40,6 +45,9 @@ public class LoginController {
         if (account.checkPassword(passwordEncoder.encode(password))) {
             model.addAttribute("warning", "Password is not correct.");
             return "user/login";
+        }
+        if (remember) {
+            sessionFactory.getCurrentSession().load(account, login);
         }
         return "redirect:/users/" + login;
     }

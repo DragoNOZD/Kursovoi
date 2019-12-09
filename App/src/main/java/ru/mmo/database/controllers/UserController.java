@@ -1,6 +1,8 @@
 package ru.mmo.database.controllers;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +19,12 @@ public class UserController {
 
     private AccountService accountService;
 
+    private SessionFactory sessionFactory;
+
     @Autowired
-    public UserController(AccountService accountService) {
+    public UserController(AccountService accountService, SessionFactory sessionFactory) {
         this.accountService = accountService;
+        this.sessionFactory = sessionFactory;
     }
 
     @RequestMapping(value = "/users")
@@ -47,11 +52,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{login}")
-    public String user(Model model, @PathVariable String login){
+    public String user(Model model, @PathVariable String login) throws UsernameNotFoundException {
         Account account = accountService.getByLogin(login);
-        if (account != null) {
+        if (account == null) {
+            throw new UsernameNotFoundException("User is not exists");
+        }
+        Account currentAccount = sessionFactory.getCurrentSession().get(Account.class, login);
+        if (account.getLogin().equals(currentAccount.getLogin())) {
             model.addAttribute("login", account.getLogin());
         }
+        model.addAttribute("login", "Guest");
         return "user/user";
     }
 }

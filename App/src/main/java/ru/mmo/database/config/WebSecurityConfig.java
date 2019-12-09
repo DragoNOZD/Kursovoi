@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().hasRole("Admin")
 				.and()
-				.authorizeRequests().antMatchers("/users**").permitAll()
+				.authorizeRequests().antMatchers("/users**").hasAuthority("Read")
 				.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/loginCheck").permitAll()
 				.and()

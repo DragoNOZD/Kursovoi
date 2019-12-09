@@ -30,7 +30,9 @@ public class AccountDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		Account account = sessionFactory.getCurrentSession().get(Account.class, login);
 
-		if (account == null){ throw new UsernameNotFoundException("User not found."); }
+		if (account == null) {
+			throw new UsernameNotFoundException("User not found.");
+		}
 
 		User.UserBuilder userBuilder = User.withUsername(login);
 		userBuilder.password(account.getPassword());
