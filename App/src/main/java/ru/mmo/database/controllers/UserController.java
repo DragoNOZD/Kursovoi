@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.mmo.database.account.Account;
 import ru.mmo.database.account.AccountService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,9 @@ public class UserController {
 
     private AccountService accountService;
 
-    private SessionFactory sessionFactory;
-
     @Autowired
-    public UserController(AccountService accountService, SessionFactory sessionFactory) {
+    public UserController(AccountService accountService) {
         this.accountService = accountService;
-        this.sessionFactory = sessionFactory;
     }
 
     @RequestMapping(value = "/users")
@@ -52,16 +50,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{login}")
-    public String user(Model model, @PathVariable String login) throws UsernameNotFoundException {
+    public String user(Model model, @PathVariable String login, HttpServletRequest request) throws UsernameNotFoundException {
         Account account = accountService.getByLogin(login);
         if (account == null) {
             throw new UsernameNotFoundException("User is not exists");
         }
-        Account currentAccount = sessionFactory.getCurrentSession().get(Account.class, login);
-        if (account.getLogin().equals(currentAccount.getLogin())) {
-            model.addAttribute("login", account.getLogin());
-        }
-        model.addAttribute("login", "Guest");
+        Account currentAccount = (Account)request.getSession().getAttribute("currentUser");
+        model.addAttribute("edit", (currentAccount != null && account.getLogin().equals(currentAccount.getLogin())));
+        model.addAttribute("login", account.getLogin());
+        model.addAttribute("img", account.getImage());
         return "user/user";
+    }
+
+    @RequestMapping(value = "/users/{login}/settings")
+    public String userSettings(Model model, @PathVariable String login, HttpServletRequest request){
+        Account account = accountService.getByLogin(login);
+        if (account == null) {
+            throw new UsernameNotFoundException("User is not exists");
+        }
+        Account currentAccount = (Account)request.getSession().getAttribute("currentUser");
+        if (!account.getLogin().equals(currentAccount.getLogin())){
+            return "redirect: /users/" + login;
+        }
+        model.addAttribute("login", account.getLogin());
+        return "user/userSettings";
     }
 }

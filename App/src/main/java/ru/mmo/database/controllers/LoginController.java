@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.mmo.database.account.Account;
 import ru.mmo.database.account.AccountService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class LoginController {
 
@@ -18,13 +20,10 @@ public class LoginController {
 
     private PasswordEncoder passwordEncoder;
 
-    private SessionFactory sessionFactory;
-
     @Autowired
-    public LoginController(AccountService accountService, PasswordEncoder passwordEncoder, SessionFactory sessionFactory) {
+    public LoginController(AccountService accountService, PasswordEncoder passwordEncoder) {
         this.accountService = accountService;
         this.passwordEncoder = passwordEncoder;
-        this.sessionFactory = sessionFactory;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -33,7 +32,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-    public String loginCheck(Model model,
+    public String loginCheck(Model model, HttpServletRequest request,
                              @RequestParam(value = "login", defaultValue = "") String login,
                              @RequestParam(value = "password", defaultValue = "") String password,
                              @RequestParam(value = "remember-me", defaultValue = "false") boolean remember){
@@ -47,7 +46,7 @@ public class LoginController {
             return "user/login";
         }
         if (remember) {
-            sessionFactory.getCurrentSession().load(account, login);
+            request.getSession().setAttribute("currentUser", account);
         }
         return "redirect:/users/" + login;
     }

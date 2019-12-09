@@ -1,5 +1,6 @@
 package ru.mmo.database.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +28,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 	private final PasswordEncoder passwordEncoder;
 
+	@Autowired
 	public InitialDataLoader(AccountService accountService, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, PasswordEncoder passwordEncoder) {
 		this.accountService = accountService;
 		this.roleRepository = roleRepository;

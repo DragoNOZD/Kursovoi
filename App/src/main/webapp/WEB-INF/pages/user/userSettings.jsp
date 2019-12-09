@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>${login}</title>
+        <title>${login}'s Settings</title>
         <link href="<spring:url value="/resources/css/basic.css" />" rel="stylesheet"/>
     </head>
     <body class="red">

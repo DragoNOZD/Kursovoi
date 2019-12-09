@@ -36,8 +36,8 @@ public class AccountDetailsServiceImpl implements UserDetailsService {
 
 		User.UserBuilder userBuilder = User.withUsername(login);
 		userBuilder.password(account.getPassword());
-		String[] names = account.getRolesNames().toArray(new String[0]);
-		userBuilder.roles(names);
+		String[] roles = account.getRolesNames().toArray(new String[0]);
+		userBuilder.roles(roles);
 		List<String> privileges = new ArrayList<>();
 		account.getRoles()
 				.forEach(role -> role.getPrivileges()
